@@ -1,6 +1,9 @@
 const express = require('express');
 const hbs = require('hbs'); 
 const fs = require('fs'); 
+// set up process port for heroku using env variables
+const port = process.env.PORT || 8000;
+//put express into app variable
 var app = express(); 
 //set up hbs to use partials to set an item on multiple pages. 
 hbs.registerPartials(__dirname + '/views/partials');
@@ -68,6 +71,8 @@ app.get('/bad', (req, res) => {
 }); 
 // need to tell app where to listen for input, app.listen can take a second argument
 // a function and tells what server it's on. 
-app.listen(8000, () => {
-    console.log('server up on port 8000');
+// to push to heroku need to make this dynmaic. heroku tells you what port to use. 
+// use env variables. port that was set earlier
+app.listen(port, () => {
+    console.log(`server up on port ${port}`);
 });
